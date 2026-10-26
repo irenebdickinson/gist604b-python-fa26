@@ -362,25 +362,81 @@ def join_station_data(stations_df, readings_df):
         Joined table: 1000 rows with station details added!
     """
     
-    # TODO: Print a header
-    # TODO: Use print("=" * 50) and print("JOINING STATION DATA")
+   def join_station_data(stations_df, readings_df):
+    """
+    Join sensor readings with station metadata
     
-    # TODO: Print the shapes of both input DataFrames
-    # TODO: Show how many stations and how many readings
+    This function joins station information (name, location) with temperature readings.
+    You'll add station details (like station name and coordinates) to each temperature reading.
     
-    # TODO: Join the DataFrames using pd.merge()
-    # TODO: Use the 'station_id' column as the key
-    # TODO: Use how='left' to keep all readings even if station info is missing
+    Args:
+        stations_df (pandas.DataFrame): Station information with 'station_id', 'station_name', 
+                                       'latitude', 'longitude', etc.
+        readings_df (pandas.DataFrame): Temperature readings with 'station_id', 'date', 
+                                       'temperature_c', etc.
     
-    # TODO: Print the shape of the joined DataFrame
-    # TODO: Verify all readings are still present
+    Returns:
+        pandas.DataFrame: Combined dataset with readings AND station information
+    """
     
-    # TODO: Print the new columns that were added
-    # TODO: Show which columns came from the stations table
+    print("=" * 50)
+    print("JOINING STATION DATA")
+    print("=" * 50)
     
-    # TODO: Return the joined DataFrame
+    # Input validation
+    if readings_df is None or len(readings_df) == 0:
+        print("❌ ERROR: Readings DataFrame is empty or None")
+        return pd.DataFrame()
     
-    pass  # Remove this line when you implement the function
+    if stations_df is None or len(stations_df) == 0:
+        print("❌ ERROR: Stations DataFrame is empty or None") 
+        return pd.DataFrame()
+    
+    # Check for required join key
+    if 'station_id' not in readings_df.columns:
+        print("❌ ERROR: 'station_id' column missing from readings data")
+        return pd.DataFrame()
+    
+    if 'station_id' not in stations_df.columns:
+        print("❌ ERROR: 'station_id' column missing from stations data")
+        return pd.DataFrame()
+    
+    # Print input summary
+    print(f"Input data:")
+    print(f"  Readings: {len(readings_df)} rows, {len(readings_df.columns)} columns")
+    print(f"  Stations: {len(stations_df)} rows, {len(stations_df.columns)} columns")
+    
+    # Analyze join keys
+    readings_stations = set(readings_df['station_id'].unique())
+    metadata_stations = set(stations_df['station_id'].unique())
+    
+    print(f"\nJoin analysis:")
+    print(f"  Stations in readings: {len(readings_stations)}")
+    print(f"  Stations in metadata: {len(metadata_stations)}")
+    print(f"  Stations in both: {len(readings_stations & metadata_stations)}")
+    
+    if readings_stations - metadata_stations:
+        print(f"  ⚠️ Readings without metadata: {readings_stations - metadata_stations}")
+    if metadata_stations - readings_stations:
+        print(f"  ℹ️ Metadata without readings: {metadata_stations - readings_stations}")
+    
+    # Perform left join to keep all readings
+    print(f"\nPerforming LEFT JOIN (keeping all readings)...")
+    result = pd.merge(readings_df, stations_df, on='station_id', how='left')
+    
+    # Validate results
+    missing_metadata_count = result['station_name'].isna().sum()
+    complete_records = len(result) - missing_metadata_count
+    
+    print(f"\nJoin results:")
+    print(f"  Total records: {len(result)}")
+    print(f"  Complete records: {complete_records}")
+    print(f"  Records with missing metadata: {missing_metadata_count}")
+    print(f"  Data completeness: {100*complete_records/len(result):.1f}%")
+    
+    print("\n✅ Station data join completed successfully!")
+    
+    return result
 
 
 # =============================================================================
