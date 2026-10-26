@@ -50,7 +50,7 @@ def load_spatial_data(file_path: Union[str, Path], **kwargs) -> gpd.GeoDataFrame
         >>> gdf = load_spatial_data('data/cities.geojson')
         >>> print(f"Loaded {len(gdf)} features")
     """
-   from typing import Union
+from typing import Union
 import geopandas as gpd
 from pathlib import Path
 
@@ -121,7 +121,7 @@ def explore_properties(gdf: gpd.GeoDataFrame) -> Dict[str, Any]:
         >>> print(f"Bounds: {props['bounds']}")
         >>> print(f"Geometry types: {props['geometry_types']}")
     """
-   import geopandas as gpd
+import geopandas as gpd
 import numpy as np
 from typing import Dict, Any
 
@@ -442,7 +442,7 @@ def spatial_relationships(
         >>> result = spatial_relationships(points, lines, 'distance')
         >>> distances = result['results']
     """
-   import geopandas as gpd
+import geopandas as gpd
 from typing import Dict, Any
 
 def spatial_relationships(
@@ -704,7 +704,7 @@ def overlay_and_visualize(
         >>> result = overlay_and_visualize(cities, save_path='cities_map.png')
         >>> plt.show()
     """
-   import geopandas as gpd
+import geopandas as gpd
 import matplotlib.pyplot as plt
 from matplotlib.patches import Patch
 from typing import Dict, Any, Optional, Union
