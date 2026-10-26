@@ -41,66 +41,65 @@ def load_and_explore_gis_data(file_path):
         ...
     """
     
-      
-       print("=" * 50)
-       print("LOADING AND EXPLORING GIS DATA")
-       print("=" * 50)
-       
-       # Step 1: Check if file exists
-       if not os.path.exists(file_path):
-           print(f"❌ ERROR: File not found: {file_path}")
-           print("Please check:")
-           print("- Is the file path correct?")
-           print("- Are you in the right directory?")
-           print("- Does the file exist?")
-           return None
-       
-       print(f"📁 Loading data from: {file_path}")
-       
-       # Step 2: Load the CSV file
-       try:
-           df = pd.read_csv(file_path)
-           print("✅ File loaded successfully!")
-       except Exception as e:
-           print(f"❌ ERROR loading file: {e}")
-           return None
-       
-       # Step 3: Show basic dataset information
-       print(f"\n📊 DATASET OVERVIEW")
-       print(f"Shape: {df.shape} - {df.shape[0]} rows and {df.shape[1]} columns")
-       print(f"Columns: {list(df.columns)}")
-       
-       # Step 4: Show data types
-       print(f"\n🔧 DATA TYPES:")
-       for col in df.columns:
-           print(f"   {col}: {df[col].dtype}")
-       
-       # Step 5: Show first few rows
-       print(f"\n👀 FIRST 5 ROWS:")
-       print(df.head())
-       
-       # Step 6: Show summary statistics
-       print(f"\n📈 SUMMARY STATISTICS:")
-       print(df.describe())
-       
-       # Step 7: Check for data quality issues
-       print(f"\n🔍 DATA QUALITY CHECK:")
-       missing = df.isnull().sum()
-       if missing.sum() > 0:
-           print("Missing values found:")
-           print(missing[missing > 0])
-       else:
-           print("✅ No missing values")
-           
-       duplicates = df.duplicated().sum()
-       if duplicates > 0:
-           print(f"⚠️  Found {duplicates} duplicate rows")
-       else:
-           print("✅ No duplicate rows")
-       
-       print(f"\n🎉 Data exploration complete! Dataset is ready for analysis.")
-       
-       return df
+    print("=" * 50)
+    print("LOADING AND EXPLORING GIS DATA")
+    print("=" * 50)
+        
+        # Step 1: Check if file exists
+    if not os.path.exists(file_path):
+            print(f"❌ ERROR: File not found: {file_path}")
+            print("Please check:")
+            print("- Is the file path correct?")
+            print("- Are you in the right directory?")
+            print("- Does the file exist?")
+            return None
+        
+    print(f"📁 Loading data from: {file_path}")
+        
+        # Step 2: Load the CSV file
+    try:
+            df = pd.read_csv(file_path)
+            print("✅ File loaded successfully!")
+    except Exception as e:
+            print(f"❌ ERROR loading file: {e}")
+            return None
+        
+        # Step 3: Show basic dataset information
+    print(f"\n📊 DATASET OVERVIEW")
+    print(f"Shape: {df.shape} - {df.shape[0]} rows and {df.shape[1]} columns")
+    print(f"Columns: {list(df.columns)}")
+        
+        # Step 4: Show data types
+    print(f"\n🔧 DATA TYPES:")
+    for col in df.columns:
+            print(f"   {col}: {df[col].dtype}")
+        
+        # Step 5: Show first few rows
+    print(f"\n👀 FIRST 5 ROWS:")
+    print(df.head())
+        
+        # Step 6: Show summary statistics
+    print(f"\n📈 SUMMARY STATISTICS:")
+    print(df.describe())
+        
+        # Step 7: Check for data quality issues
+    print(f"\n🔍 DATA QUALITY CHECK:")
+    missing = df.isnull().sum()
+    if missing.sum() > 0:
+            print("Missing values found:")
+            print(missing[missing > 0])
+    else:
+            print("✅ No missing values")
+            
+    duplicates = df.duplicated().sum()
+    if duplicates > 0:
+            print(f"⚠️  Found {duplicates} duplicate rows")
+    else:
+            print("✅ No duplicate rows")
+        
+    print(f"\n🎉 Data exploration complete! Dataset is ready for analysis.")
+        
+    return df
 
 # =============================================================================
 # FUNCTION 2: FILTER ENVIRONMENTAL DATA
