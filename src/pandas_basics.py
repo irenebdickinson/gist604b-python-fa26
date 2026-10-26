@@ -362,7 +362,7 @@ def join_station_data(stations_df, readings_df):
         Joined table: 1000 rows with station details added!
     """
     
-   def join_station_data(stations_df, readings_df):
+def join_station_data(stations_df, readings_df):
     """
     Join sensor readings with station metadata
     
